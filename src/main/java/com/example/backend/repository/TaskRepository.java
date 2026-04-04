@@ -1,21 +1,11 @@
 package com.example.backend.repository;
 
-import com.example.backend.model.dto.TaskRequestDTO;
-import com.example.backend.model.dto.TaskResponseDTO;
 
-import java.util.List;
-import java.util.Optional;
+import com.example.backend.model.entity.Task;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface TaskRepository {
-
-    TaskResponseDTO get(int id);
-
-    List<TaskResponseDTO> getAll();
-
-    void create(TaskRequestDTO task);
-
-    void delete(int id);
-
-    void update(int id, TaskRequestDTO task);
+@Repository
+public interface TaskRepository extends JpaRepository<Task, Integer> {
 
 }
