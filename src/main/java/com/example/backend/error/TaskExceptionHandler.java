@@ -1,8 +1,10 @@
 package com.example.backend.error;
 
 import com.example.backend.error.exception.TaskNotFoundException;
+import com.example.backend.model.error.ResponseErrorEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -20,5 +22,15 @@ public class TaskExceptionHandler {
                 e.getMessage(),
                 request.getDescription(false)
         ), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ResponseErrorEntity> handleValidationException(MethodArgumentNotValidException e, WebRequest request) {
+        return new ResponseEntity<>(new ResponseErrorEntity(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST,
+                e.getMessage(),
+                request.getDescription(false)
+        ), HttpStatus.BAD_REQUEST);
     }
 }

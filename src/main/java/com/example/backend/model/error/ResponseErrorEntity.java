@@ -1,4 +1,4 @@
-package com.example.backend.error;
+package com.example.backend.model.error;
 
 import org.springframework.http.HttpStatus;
 
